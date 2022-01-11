@@ -12,6 +12,6 @@ class megaphoneAuthenticator(SimpleAuthenticator):
         return cls(
             stream=stream,
             auth_headers={
-                "Private-Token": stream.config.get("auth_token")
+                "Authorization": stream.config.get("auth_token")
             }
         )
