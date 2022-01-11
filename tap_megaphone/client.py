@@ -15,13 +15,22 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 class megaphoneStream(RESTStream):
     """megaphone stream class."""
 
-    url_base = "https://api.mysample.com"
+    # network_id = stream.config.get("network_id")
+    # url_base = f"https://cms.megaphone.fm/api/networks/{network_id}"
+
+    # @property
+    # def get_url_base(self) -> str:
+    #     """Return the api url"""
+    #     if "network_id" in self.config:
+    #         network_id = self.config.get("network_id")
+    #     url_base = f"https://cms.megaphone.fm/api/networks/{network_id}"
+    #     return url_base
 
     # OR use a dynamic url_base:
-    # @property
-    # def url_base(self) -> str:
-    #     """Return the API URL root, configurable via tap settings."""
-    #     return self.config["api_url"]
+    @property
+    def url_base(self) -> str:
+        """Return the API URL root, configurable via tap settings."""
+        return self.config["api_url"]
 
     records_jsonpath = "$[*]"  # Or override `parse_response`.
     next_page_token_jsonpath = "$.next_page"  # Or override `get_next_page_token`.
@@ -55,7 +64,10 @@ class megaphoneStream(RESTStream):
             first_match = next(iter(all_matches), None)
             next_page_token = first_match
         else:
-            next_page_token = response.headers.get("X-Next-Page", None)
+            # add print or logging statement to dictate current page
+            link_split = response.headers.get("Link", None).split(' ')
+            next_page_index = response.headers.get("Link", None).split(' ').index('rel="next"') - 1
+            next_page_token = link_split[next_page_index].replace('<', '').replace('>', '').replace(';', '')
 
         return next_page_token
 
@@ -90,3 +102,5 @@ class megaphoneStream(RESTStream):
         """As needed, append or transform raw data to match expected structure."""
         # TODO: Delete this method if not needed.
         return row
+
+

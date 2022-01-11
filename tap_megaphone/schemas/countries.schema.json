@@ -1,0 +1,28 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "items": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "label": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
