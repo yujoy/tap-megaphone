@@ -6,10 +6,10 @@
   "properties": {
     "items": {
       "type": [
-        "object",
+        "array",
         "null"
       ],
-      "properties": {
+      "items": {
         "label": {
           "type": [
             "string",
