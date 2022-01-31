@@ -94,7 +94,7 @@
     },
     "impressionsGoal": {
       "type": [
-        "string",
+        "number",
         "null"
       ]
     },
