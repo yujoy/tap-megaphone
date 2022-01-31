@@ -56,7 +56,7 @@
     },
     "explicit": {
       "type": [
-        "string",
+        "boolean",
         "null"
       ]
     },
