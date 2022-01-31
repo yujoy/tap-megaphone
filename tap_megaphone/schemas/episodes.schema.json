@@ -182,7 +182,7 @@
       "items": {
         "type": [
           "null",
-          "number"
+          "string"
         ]
       }
     },
@@ -236,13 +236,13 @@
     },
     "preOffset": {
       "type": [
-        "number",
+        "string",
         "null"
       ]
     },
     "postOffset": {
       "type": [
-        "number",
+        "string",
         "null"
       ]
     },
