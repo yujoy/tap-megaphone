@@ -29,6 +29,13 @@
         "null"
       ]
     },
+    "pubdate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
     "link": {
       "type": [
         "string",
@@ -89,6 +96,12 @@
         "null"
       ]
     },
+    "downloadUrl": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "size": {
       "type": [
         "number",
@@ -97,7 +110,7 @@
     },
     "duration": {
       "type": [
-        "string",
+        "number",
         "null"
       ]
     },
@@ -115,13 +128,13 @@
     },
     "bitrate": {
       "type": [
-        "string",
+        "number",
         "null"
       ]
     },
     "samplerate": {
       "type": [
-        "string",
+        "number",
         "null"
       ]
     },
@@ -133,7 +146,7 @@
     },
     "vbr": {
       "type": [
-        "string",
+        "boolean",
         "null"
       ]
     },
@@ -145,7 +158,7 @@
     },
     "podcastId": {
       "type": [
-        "number",
+        "string",
         "null"
       ]
     },
@@ -169,7 +182,7 @@
       "items": {
         "type": [
           "null",
-          "string"
+          "number"
         ]
       }
     },
@@ -223,13 +236,13 @@
     },
     "preOffset": {
       "type": [
-        "string",
+        "number",
         "null"
       ]
     },
     "postOffset": {
       "type": [
-        "string",
+        "number",
         "null"
       ]
     },
