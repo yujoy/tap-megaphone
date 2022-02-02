@@ -7,6 +7,7 @@ from typing import Any, Dict, Optional, Union, List, Iterable
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
 from tap_megaphone.auth import megaphoneAuthenticator
+import time
 
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
@@ -101,6 +102,7 @@ class megaphoneStream(RESTStream):
     def post_process(self, row: dict, context: Optional[dict]) -> dict:
         """As needed, append or transform raw data to match expected structure."""
         # TODO: Delete this method if not needed.
+        time.sleep(1)
         return row
 
 
