@@ -30,7 +30,7 @@ from tap_megaphone.streams import (
 STREAM_TYPES = [
     EpisodesStream,
     NetworksStream,
-    PodcastsStream,
+    PodcastsStream
     # EpisodesStream,
     # CampaignsStream,
     # CampaignOrdersStream,
