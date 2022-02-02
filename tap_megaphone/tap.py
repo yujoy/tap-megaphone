@@ -28,9 +28,9 @@ from tap_megaphone.streams import (
 # TODO: Compile a list of custom stream types here
 #       OR rewrite discover_streams() below with your custom logic.
 STREAM_TYPES = [
-    EpisodesStream
-    # NetworksStream,
-    # PodcastsStream,
+    EpisodesStream,
+    NetworksStream,
+    PodcastsStream,
     # EpisodesStream,
     # CampaignsStream,
     # CampaignOrdersStream,
