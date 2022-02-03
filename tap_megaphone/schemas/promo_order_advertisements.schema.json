@@ -17,13 +17,13 @@
     },
     "audioFileProcessing": {
       "type": [
-        "string",
+        "boolean",
         "null"
       ]
     },
     "audioFileDuration": {
       "type": [
-        "number",
+        "string",
         "null"
       ]
     },
