@@ -2,6 +2,8 @@
 
 from typing import Optional
 from pathlib import Path
+from typing import Any, Dict, Optional, Union, List, Iterable
+import time
 
 from tap_megaphone.client import megaphoneStream
 
@@ -54,6 +56,13 @@ class EpisodesStream(PodcastsStream):
     schema_filepath = SCHEMAS_DIR / "episodes.schema.json"
     parent_stream_type = PodcastsStream
     path = "/podcasts/{podcast_id}/episodes?"
+
+    def get_url_params(self, context: Optional[dict], next_page_token: Optional[Any]) -> Dict[str, Any]:
+        self.logger.info('starting sleep')
+        time.sleep(1)
+        self.logger.info('ending sleep')
+
+        return super(megaphoneStream, self).get_url_params(context, next_page_token)
 
 
 class CampaignsStream(megaphoneStream):
