@@ -128,18 +128,6 @@
         ]
       }
     },
-    "geoexclusion": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "items": {
-        "type": [
-          "null",
-          "string"
-        ]
-      }
-    },
     "state": {
       "type": [
         "string",
@@ -170,6 +158,18 @@
         "null"
       ]
     },
+    "trackingURLs": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
     "targets": {
       "type": [
         "array",
@@ -181,19 +181,19 @@
           "null"
         ],
         "properties": {
-            "type": {
-              "type": [
-                "string",
-                "null"
-              ]
-            },
-            "id": {
-              "type": [
-                "string",
-                "null"
-              ]
-            }
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
+        }
       }
     },
     "priceType": {

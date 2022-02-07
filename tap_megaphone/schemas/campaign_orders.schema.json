@@ -134,6 +134,18 @@
         ]
       }
     },
+    "geoexclusion": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "null",
+          "string"
+        ]
+      }
+    },
     "state": {
       "type": [
         "string",
@@ -190,13 +202,19 @@
           }
       }
     },
+    "priceType": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "promo": {
       "type": [
         "boolean",
         "null"
       ]
     },
-    "trackingURLs": {
+    "deviceTargets": {
       "type": [
         "array",
         "null"
@@ -207,6 +225,44 @@
           "null"
         ]
       }
+    },
+    "frequencyCaps": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+            "days": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "impressions": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
+      }
+    },
+    "targetedSegments": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pacingType": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   }
 }
