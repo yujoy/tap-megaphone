@@ -9,41 +9,47 @@
         "array",
         "null"
       ],
-      "properties": {
-        "label": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "value": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "children": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
+      "items": {
+        "type": [
+          "null",
+          "object"
+        ],
+        "properties": {
+          "label": {
             "type": [
-              "null",
-              "object"
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "children": {
+            "type": [
+              "array",
+              "null"
             ],
-            "properties": {
-              "label": {
-                "type": [
-                  "string",
-                  "null"
-                ]
-              },
-              "value": {
-                "type": [
-                  "string",
-                  "null"
-                ]
+            "items": {
+              "type": [
+                "null",
+                "object"
+              ],
+              "properties": {
+                "label": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               }
             }
           }
