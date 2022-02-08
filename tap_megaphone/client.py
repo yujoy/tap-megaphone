@@ -33,7 +33,7 @@ class megaphoneStream(RESTStream):
         return "https://cms.megaphone.fm/api/organizations/" + self.config["organization_id"]
 
     records_jsonpath = "$[*]"  # Or override `parse_response`.
-    next_page_token_jsonpath = "$.next_page"  # Or override `get_next_page_token`.
+    # next_page_token_jsonpath = "$.next_page"  # Or override `get_next_page_token`.
 
     @property
     def authenticator(self) -> megaphoneAuthenticator:
@@ -65,9 +65,15 @@ class megaphoneStream(RESTStream):
             next_page_token = first_match
         else:
             # add print or logging statement to dictate current page
-            link_split = response.headers.get("Link", None).split(' ')
-            next_page_index = response.headers.get("Link", None).split(' ').index('rel="next"') - 1
-            next_page_token = link_split[next_page_index].replace('<', '').replace('>', '').replace(';', '')
+            # link_split = response.headers.get("Link", None).split(' ')
+            # next_page_index = response.headers.get("Link", None).split(' ').index('rel="next"') - 1
+            # next_page_token = link_split[next_page_index].replace('<', '').replace('>', '').replace(';', '')
+
+            pagination_response = response.headers.get("Link", None)
+            if pagination_response:
+                next_page_token = pagination_response.split(', ')[1].split('?page=')[1].split('>')[0]
+            else:
+                next_page_token = None
 
         return next_page_token
 
@@ -78,6 +84,7 @@ class megaphoneStream(RESTStream):
         params: dict = {}
         if next_page_token:
             params["page"] = next_page_token
+            params["per_page"] = "500"
         if self.replication_key:
             params["sort"] = "asc"
             params["order_by"] = self.replication_key
