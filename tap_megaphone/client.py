@@ -1,6 +1,7 @@
 """REST client handling, including megaphoneStream base class."""
 
 import requests
+import urllib.parse
 from pathlib import Path
 from typing import Any, Dict, Optional, Union, List, Iterable
 
@@ -70,8 +71,13 @@ class megaphoneStream(RESTStream):
             # next_page_token = link_split[next_page_index].replace('<', '').replace('>', '').replace(';', '')
 
             pagination_response = response.headers.get("Link", None)
-            if pagination_response:
-                next_page_token = pagination_response.split(', ')[1].split('?page=')[1].split('>')[0]
+            if pagination_response and 'next' in pagination_response:
+                # next_page_token = pagination_response.split(', ')[1].split('?page=')[1].split('>')[0]
+                for i in pagination_response.split('rel='):
+                    if 'next' in i:
+                        next_page_index = pagination_response.split('rel=').index(i) - 1
+                next_page_token = pagination_response.split('rel=')[next_page_index].split('<')[1].split('>')[0]
+                self.logger.info('next page: ' + next_page_token)
             else:
                 next_page_token = None
 
@@ -81,10 +87,9 @@ class megaphoneStream(RESTStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization."""
-        params: dict = {}
         if next_page_token:
-            params["page"] = next_page_token
-            params["per_page"] = "500"
+            return urllib.parse.parse_qs(urllib.parse.urlparse(next_page_token).query)
+        params: dict = {"per_page": "500"}
         if self.replication_key:
             params["sort"] = "asc"
             params["order_by"] = self.replication_key
