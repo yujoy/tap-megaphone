@@ -62,7 +62,10 @@ class EpisodesStream(PodcastsStream):
         time.sleep(1)
         self.logger.info('ending sleep')
 
-        return super(megaphoneStream, self).get_url_params(context, next_page_token)
+        # return super(megaphoneStream, self).get_url_params(context, next_page_token)
+
+        params = super().get_url_params(context, next_page_token)
+        return params
 
 
 class CampaignsStream(megaphoneStream):
