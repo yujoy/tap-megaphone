@@ -62,8 +62,6 @@ class EpisodesStream(PodcastsStream):
         time.sleep(1)
         self.logger.info('ending sleep')
 
-        # return super(megaphoneStream, self).get_url_params(context, next_page_token)
-
         params = super().get_url_params(context, next_page_token)
         return params
 
@@ -130,7 +128,6 @@ class CampaignOrderAdvertisementsStream(CampaignOrdersStream):
 class PromoOrderAdvertisementsStream(PromoOrdersStream):
     """Define custom stream."""
     name = "promo_order_advertisements"
-    # path = "/advertisements"
     primary_keys = ["id"]
     replication_key = None
     schema_filepath = SCHEMAS_DIR / "promo_order_advertisements.schema.json"
