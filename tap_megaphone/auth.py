@@ -13,5 +13,5 @@ class megaphoneAuthenticator(SimpleAuthenticator):
             stream=stream,
             auth_headers={
                 "Authorization": "Token token=" + stream.config.get("auth_token")
-            }
+            },
         )

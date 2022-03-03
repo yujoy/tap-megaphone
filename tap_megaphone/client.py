@@ -31,7 +31,10 @@ class megaphoneStream(RESTStream):
     @property
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
-        return "https://cms.megaphone.fm/api/organizations/" + self.config["organization_id"]
+        return (
+            "https://cms.megaphone.fm/api/organizations/"
+            + self.config["organization_id"]
+        )
 
     records_jsonpath = "$[*]"  # Or override `parse_response`.
     # next_page_token_jsonpath = "$.next_page"  # Or override `get_next_page_token`.
@@ -67,12 +70,16 @@ class megaphoneStream(RESTStream):
         else:
             # TODO: may want to refactor this later on
             pagination_response = response.headers.get("Link", None)
-            if pagination_response and 'next' in pagination_response:
-                for i in pagination_response.split('rel='):
-                    if 'next' in i:
-                        next_page_index = pagination_response.split('rel=').index(i) - 1
-                next_page_token = pagination_response.split('rel=')[next_page_index].split('<')[1].split('>')[0]
-                self.logger.info('next page: ' + next_page_token)
+            if pagination_response and "next" in pagination_response:
+                for i in pagination_response.split("rel="):
+                    if "next" in i:
+                        next_page_index = pagination_response.split("rel=").index(i) - 1
+                next_page_token = (
+                    pagination_response.split("rel=")[next_page_index]
+                    .split("<")[1]
+                    .split(">")[0]
+                )
+                self.logger.info("next page: " + next_page_token)
             else:
                 next_page_token = None
 
@@ -109,5 +116,3 @@ class megaphoneStream(RESTStream):
         """As needed, append or transform raw data to match expected structure."""
         # TODO: Delete this method if not needed.
         return row
-
-

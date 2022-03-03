@@ -15,6 +15,7 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 class NetworksStream(megaphoneStream):
     """Define custom stream."""
+
     name = "networks"
     path = "/networks"
     primary_keys = ["id"]
@@ -24,13 +25,12 @@ class NetworksStream(megaphoneStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {
-            "network_id": record["id"]
-        }
+        return {"network_id": record["id"]}
 
 
 class PodcastsStream(NetworksStream):
     """Define custom stream."""
+
     name = "podcasts"
     primary_keys = ["id"]
     replication_key = None
@@ -41,14 +41,12 @@ class PodcastsStream(NetworksStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {
-            "podcast_id": record["id"],
-            "network_id": record["networkId"]
-        }
+        return {"podcast_id": record["id"], "network_id": record["networkId"]}
 
 
 class EpisodesStream(PodcastsStream):
     """Define custom stream."""
+
     name = "episodes"
     # path = "/episodes?"
     primary_keys = ["id"]
@@ -57,10 +55,12 @@ class EpisodesStream(PodcastsStream):
     parent_stream_type = PodcastsStream
     path = "/podcasts/{podcast_id}/episodes?"
 
-    def get_url_params(self, context: Optional[dict], next_page_token: Optional[Any]) -> Dict[str, Any]:
-        self.logger.info('starting sleep')
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        self.logger.info("starting sleep")
         time.sleep(1)
-        self.logger.info('ending sleep')
+        self.logger.info("ending sleep")
 
         params = super().get_url_params(context, next_page_token)
         return params
@@ -68,6 +68,7 @@ class EpisodesStream(PodcastsStream):
 
 class CampaignsStream(megaphoneStream):
     """Define custom stream."""
+
     name = "campaigns"
     path = "/campaigns"
     primary_keys = ["id"]
@@ -77,13 +78,12 @@ class CampaignsStream(megaphoneStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {
-            "campaign_id": record["id"]
-        }
+        return {"campaign_id": record["id"]}
 
 
 class CampaignOrdersStream(CampaignsStream):
     """Define custom stream."""
+
     name = "campaign_orders"
     primary_keys = ["id"]
     replication_key = None
@@ -94,14 +94,12 @@ class CampaignOrdersStream(CampaignsStream):
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
 
-        return {
-            "order_id": record["id"],
-            "campaign_id": record.get("campaignId", "x")
-        }
+        return {"order_id": record["id"], "campaign_id": record.get("campaignId", "x")}
 
 
 class PromoOrdersStream(megaphoneStream):
     """Define custom stream."""
+
     name = "promo_orders"
     path = "/promos"
     primary_keys = ["id"]
@@ -110,13 +108,12 @@ class PromoOrdersStream(megaphoneStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {
-            "promo_id": record["id"]
-        }
+        return {"promo_id": record["id"]}
 
 
 class CampaignOrderAdvertisementsStream(CampaignOrdersStream):
     """Define custom stream."""
+
     name = "campaign_order_advertisements"
     primary_keys = ["id"]
     replication_key = None
@@ -127,6 +124,7 @@ class CampaignOrderAdvertisementsStream(CampaignOrdersStream):
 
 class PromoOrderAdvertisementsStream(PromoOrdersStream):
     """Define custom stream."""
+
     name = "promo_order_advertisements"
     primary_keys = ["id"]
     replication_key = None
@@ -137,6 +135,7 @@ class PromoOrderAdvertisementsStream(PromoOrdersStream):
 
 class AgenciesStream(megaphoneStream):
     """Define custom stream."""
+
     name = "agencies"
     path = "/agencies"
     primary_keys = ["id"]
@@ -146,6 +145,7 @@ class AgenciesStream(megaphoneStream):
 
 class AdvertisersStream(megaphoneStream):
     """Define custom stream."""
+
     name = "advertisers"
     path = "/advertisers"
     primary_keys = ["id"]
@@ -155,6 +155,7 @@ class AdvertisersStream(megaphoneStream):
 
 class DevicesStream(megaphoneStream):
     """Define custom stream."""
+
     name = "devices"
     path = "/"
     primary_keys = ["id"]
@@ -165,6 +166,7 @@ class DevicesStream(megaphoneStream):
 
 class NielsenSegmentsStream(megaphoneStream):
     """Define custom stream."""
+
     name = "nielsen_segments"
     path = "/"
     primary_keys = ["id"]
@@ -175,6 +177,7 @@ class NielsenSegmentsStream(megaphoneStream):
 
 class CountriesStream(megaphoneStream):
     """Define custom stream."""
+
     name = "countries"
     path = "/countries"
     primary_keys = ["id"]
@@ -185,6 +188,7 @@ class CountriesStream(megaphoneStream):
 
 class RegionsStream(megaphoneStream):
     """Define custom stream."""
+
     name = "regions"
     path = "/regions"
     primary_keys = ["id"]
@@ -195,6 +199,7 @@ class RegionsStream(megaphoneStream):
 
 class DMAsStream(megaphoneStream):
     """Define custom stream."""
+
     name = "dmas"
     path = "/dmas"
     primary_keys = ["id"]
@@ -205,6 +210,7 @@ class DMAsStream(megaphoneStream):
 
 class AdvertiserCategoriesStream(megaphoneStream):
     """Define custom stream."""
+
     name = "advertiser_categories"
     path = "/categories"
     primary_keys = ["id"]
@@ -215,6 +221,7 @@ class AdvertiserCategoriesStream(megaphoneStream):
 
 class IABAdvertiserCategoriesStream(megaphoneStream):
     """Define custom stream."""
+
     name = "iab_advertiser_categories"
     path = "/iab_categories"
     primary_keys = ["id"]
@@ -225,9 +232,9 @@ class IABAdvertiserCategoriesStream(megaphoneStream):
 
 class OrganizationTagsStream(megaphoneStream):
     """Define custom stream."""
+
     name = "organization_tags"
     path = "/tags"
     primary_keys = ["id"]
     replication_key = None
     schema_filepath = SCHEMAS_DIR / "organization_tags.schema.json"
-

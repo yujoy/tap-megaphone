@@ -23,8 +23,9 @@ from tap_megaphone.streams import (
     RegionsStream,
     DMAsStream,
     AdvertiserCategoriesStream,
-    OrganizationTagsStream
+    OrganizationTagsStream,
 )
+
 # TODO: Compile a list of custom stream types here
 #       OR rewrite discover_streams() below with your custom logic.
 STREAM_TYPES = [
@@ -44,18 +45,18 @@ STREAM_TYPES = [
     RegionsStream,
     DMAsStream,
     AdvertiserCategoriesStream,
-    OrganizationTagsStream
+    OrganizationTagsStream,
 ]
 
 
 class Tapmegaphone(Tap):
     """megaphone tap class."""
+
     name = "tap-megaphone"
 
     # TODO: Update this section with the actual config values you expect:
     config_jsonschema = th.PropertiesList(
         th.Property("auth_token", th.StringType, required=True),
-
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:
