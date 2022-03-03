@@ -1,16 +1,21 @@
 """Tests standard tap features using the built-in SDK tests library."""
 
-import datetime
+import os
 
+from singer_sdk.helpers._util import read_json_file
 from singer_sdk.testing import get_standard_tap_tests
 
 from tap_megaphone.tap import Tapmegaphone
 
-SAMPLE_CONFIG = {
-    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
-    # TODO: Initialize minimal tap config
-}
+CONFIG_PATH = ".secrets/config.json"
 
+if os.getenv("CI"):  # true when running a GitHub Actions workflow
+    SAMPLE_CONFIG = {
+        "auth_token": os.getenv("TAP_MEGAPHONE_AUTH_TOKEN"),
+        "organization_id": os.getenv("TAP_MEGAPHONE_ORGANIZATION_ID")
+    }
+else:
+    SAMPLE_CONFIG = read_json_file(CONFIG_PATH)
 
 # Run standard built-in tap tests from the SDK:
 def test_standard_tap_tests():
