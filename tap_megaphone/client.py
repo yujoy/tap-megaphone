@@ -65,14 +65,9 @@ class megaphoneStream(RESTStream):
             first_match = next(iter(all_matches), None)
             next_page_token = first_match
         else:
-            # add print or logging statement to dictate current page
-            # link_split = response.headers.get("Link", None).split(' ')
-            # next_page_index = response.headers.get("Link", None).split(' ').index('rel="next"') - 1
-            # next_page_token = link_split[next_page_index].replace('<', '').replace('>', '').replace(';', '')
-
+            # TODO: may want to refactor this later on
             pagination_response = response.headers.get("Link", None)
             if pagination_response and 'next' in pagination_response:
-                # next_page_token = pagination_response.split(', ')[1].split('?page=')[1].split('>')[0]
                 for i in pagination_response.split('rel='):
                     if 'next' in i:
                         next_page_index = pagination_response.split('rel=').index(i) - 1
