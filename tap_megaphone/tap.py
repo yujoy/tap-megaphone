@@ -2,28 +2,28 @@
 
 from typing import List
 
-from singer_sdk import Tap, Stream
+from singer_sdk import Stream, Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
 # TODO: Import your custom stream types here:
 from tap_megaphone.streams import (
-    PodcastsStream,
+    AdvertiserCategoriesStream,
+    AdvertisersStream,
+    AgenciesStream,
+    CampaignOrderAdvertisementsStream,
+    CampaignOrdersStream,
+    CampaignsStream,
+    CountriesStream,
+    DevicesStream,
+    DMAsStream,
     EpisodesStream,
     NetworksStream,
-    CampaignsStream,
-    CampaignOrdersStream,
-    PromoOrdersStream,
-    CampaignOrderAdvertisementsStream,
-    AgenciesStream,
-    AdvertisersStream,
-    PromoOrderAdvertisementsStream,
-    DevicesStream,
     NielsenSegmentsStream,
-    CountriesStream,
-    RegionsStream,
-    DMAsStream,
-    AdvertiserCategoriesStream,
     OrganizationTagsStream,
+    PodcastsStream,
+    PromoOrderAdvertisementsStream,
+    PromoOrdersStream,
+    RegionsStream,
 )
 
 # TODO: Compile a list of custom stream types here

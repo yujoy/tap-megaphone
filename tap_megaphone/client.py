@@ -1,14 +1,14 @@
 """REST client handling, including megaphoneStream base class."""
 
-import requests
 import urllib.parse
 from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
+from typing import Any, Dict, Iterable, List, Optional, Union
 
+import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
-from tap_megaphone.auth import megaphoneAuthenticator
 
+from tap_megaphone.auth import megaphoneAuthenticator
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 

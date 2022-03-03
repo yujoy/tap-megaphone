@@ -1,9 +1,8 @@
 """Stream type classes for tap-megaphone."""
 
-from typing import Optional
-from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
 import time
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Optional, Union
 
 from tap_megaphone.client import megaphoneStream
 
