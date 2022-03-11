@@ -57,6 +57,8 @@ class Tapmegaphone(Tap):
     # TODO: Update this section with the actual config values you expect:
     config_jsonschema = th.PropertiesList(
         th.Property("auth_token", th.StringType, required=True),
+        th.Property("organization_id", th.StringType, required=True),
+        th.Property("metrics_log_level", th.StringType, required=False),
     ).to_dict()
 
     def discover_streams(self) -> List[Stream]:
