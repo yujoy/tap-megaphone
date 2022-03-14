@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tap-megaphone"
-version = "0.1.1"
+version = "0.1.2"
 description = "`tap-megaphone` is a Singer tap for Megaphone, built with the Meltano SDK for Singer Taps."
 authors = ["Joy Yu"]
 keywords = [
