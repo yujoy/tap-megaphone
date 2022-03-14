@@ -5,7 +5,7 @@ import os
 from singer_sdk.helpers._util import read_json_file
 from singer_sdk.testing import get_standard_tap_tests
 
-from tap_megaphone.tap import Tapmegaphone
+from tap_megaphone.tap import TapMegaphone
 
 CONFIG_PATH = ".secrets/config.json"
 
@@ -20,7 +20,7 @@ else:
 # Run standard built-in tap tests from the SDK:
 def test_standard_tap_tests():
     """Run standard tap tests from the SDK."""
-    tests = get_standard_tap_tests(Tapmegaphone, config=SAMPLE_CONFIG)
+    tests = get_standard_tap_tests(TapMegaphone, config=SAMPLE_CONFIG)
     for test in tests:
         test()
 
