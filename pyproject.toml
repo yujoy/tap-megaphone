@@ -40,4 +40,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 # CLI declaration
-tap-instagram = 'tap_megaphone.tap:TapMegaphone.cli'
+tap-megaphone = 'tap_megaphone.tap:TapMegaphone.cli'
