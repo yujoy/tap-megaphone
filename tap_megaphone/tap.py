@@ -49,7 +49,7 @@ STREAM_TYPES = [
 ]
 
 
-class Tapmegaphone(Tap):
+class TapMegaphone(Tap):
     """megaphone tap class."""
 
     name = "tap-megaphone"
