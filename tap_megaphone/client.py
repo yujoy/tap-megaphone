@@ -1,5 +1,6 @@
 """REST client handling, including megaphoneStream base class."""
 
+import re
 import urllib.parse
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Union
@@ -7,6 +8,7 @@ from typing import Any, Dict, Iterable, List, Optional, Union
 import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
+from singer_sdk.exceptions import FatalAPIError
 
 from tap_megaphone.auth import megaphoneAuthenticator
 
@@ -111,6 +113,28 @@ class megaphoneStream(RESTStream):
         """Parse the response and return an iterator of result rows."""
         # TODO: Parse response body and return a set of records.
         yield from extract_jsonpath(self.records_jsonpath, input=response.json())
+
+    def validate_response(self, response: requests.Response) -> None:
+        if 400 <= response.status_code < 500:
+            msg = (
+                f"{response.status_code} Client Error: "
+                f"{response.reason} for path: {self.path}: "
+                f"{response.json().get('error', {})}"
+            )
+
+            error_message = response.json().get("error", {})
+
+            # We sometimes seem to lose permissions to particular podcasts, skip these records
+            inaccessible_pattern = re.compile(
+                "^.*User does not have access to object requested.*$"
+            )
+
+            if response.status_code == 403 and inaccessible_pattern.match(error_message):
+                self.logger.warning(f"Skipping record because user does not have access to the object: {msg}")
+                return
+
+            raise FatalAPIError(msg)
+        super().validate_response(response)
 
     def post_process(self, row: dict, context: Optional[dict]) -> dict:
         """As needed, append or transform raw data to match expected structure."""
