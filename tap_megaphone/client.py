@@ -8,7 +8,7 @@ from typing import Any, Dict, Iterable, List, Optional, Union
 import requests
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
-from singer_sdk.exceptions import FatalAPIError, RetriableAPIError
+from singer_sdk.exceptions import FatalAPIError
 
 from tap_megaphone.auth import megaphoneAuthenticator
 
