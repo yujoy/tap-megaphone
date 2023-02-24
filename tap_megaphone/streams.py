@@ -24,7 +24,7 @@ class NetworksStream(megaphoneStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {"network_id": record.get("id")}
+        return {"network_id": record.get("id", "not available")}
 
 
 class PodcastsStream(NetworksStream):
@@ -41,7 +41,7 @@ class PodcastsStream(NetworksStream):
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
 
-        return {"podcast_id": record.get("id"), "network_id": record.get("networkId")}
+        return {"podcast_id": record.get("id", "not available"), "network_id": record.get("networkId")}
 
 
 class EpisodesStream(PodcastsStream):
@@ -78,7 +78,7 @@ class CampaignsStream(megaphoneStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {"campaign_id": record.get("id")}
+        return {"campaign_id": record.get("id", "not available")}
 
 
 class CampaignOrdersStream(CampaignsStream):
@@ -94,7 +94,7 @@ class CampaignOrdersStream(CampaignsStream):
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
 
-        return {"order_id": record.get("id"), "campaign_id": record.get("campaignId", "x")}
+        return {"order_id": record.get("id", "not available"), "campaign_id": record.get("campaignId", "not available")}
 
 
 class PromoOrdersStream(megaphoneStream):
@@ -108,7 +108,7 @@ class PromoOrdersStream(megaphoneStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {"promo_id": record.get("id")}
+        return {"promo_id": record.get("id", "not available")}
 
 
 class CampaignOrderAdvertisementsStream(CampaignOrdersStream):
