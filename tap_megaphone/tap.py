@@ -35,7 +35,7 @@ STREAM_TYPES = [
     CampaignsStream,
     CampaignOrdersStream,
     PromoOrdersStream,
-    # CampaignOrderAdvertisementsStream,
+    CampaignOrderAdvertisementsStream,
     PromoOrderAdvertisementsStream,
     AgenciesStream,
     AdvertisersStream,

@@ -59,13 +59,7 @@
         "null"
       ]
     },
-    "orderID": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "promoID": {
+    "orderId": {
       "type": [
         "string",
         "null"
