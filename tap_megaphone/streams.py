@@ -41,7 +41,10 @@ class PodcastsStream(NetworksStream):
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
 
-        return {"podcast_id": record.get("id", "not available"), "network_id": record.get("networkId")}
+        return {
+            "podcast_id": record.get("id", "not available"),
+            "network_id": record.get("networkId"),
+        }
 
 
 class EpisodesStream(PodcastsStream):
@@ -94,7 +97,10 @@ class CampaignOrdersStream(CampaignsStream):
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
 
-        return {"order_id": record.get("id", "not available"), "campaign_id": record.get("campaignId", "not available")}
+        return {
+            "order_id": record.get("id", "not available"),
+            "campaign_id": record.get("campaignId", "not available"),
+        }
 
 
 class PromoOrdersStream(megaphoneStream):

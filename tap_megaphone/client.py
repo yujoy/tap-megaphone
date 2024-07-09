@@ -3,13 +3,13 @@
 import re
 import urllib.parse
 from pathlib import Path
-from typing import Any, Dict, Iterable, Callable, Optional, Union
+from typing import Any, Callable, Dict, Iterable, Optional, Union
 
 import backoff
 import requests
+from singer_sdk.exceptions import FatalAPIError, RetriableAPIError
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
-from singer_sdk.exceptions import FatalAPIError, RetriableAPIError
 
 from tap_megaphone.auth import megaphoneAuthenticator
 
@@ -157,8 +157,12 @@ class megaphoneStream(RESTStream):
                 "^.*User does not have access to object requested.*$"
             )
 
-            if response.status_code == 403 and inaccessible_pattern.match(error_message):
-                self.logger.warning(f"Skipping record because user does not have access to the object: {msg}")
+            if response.status_code == 403 and inaccessible_pattern.match(
+                error_message
+            ):
+                self.logger.warning(
+                    f"Skipping record because user does not have access to the object: {msg}"
+                )
                 return
 
             raise FatalAPIError(msg)
