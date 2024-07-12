@@ -7,7 +7,6 @@ on: [push]
 
 jobs:
   linting:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -15,23 +14,22 @@ jobs:
         python-version: [3.9]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-      with:
-        version: 1.1.12
-    - name: Install dependencies
-      run: |
-        poetry install
-    - name: Run lint command from tox.ini
-      run: |
-        poetry run tox -e lint
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.8.3
+      - name: Install dependencies
+        run: |
+          poetry install
+      - name: Run lint command from tox.ini
+        run: |
+          poetry run tox -e lint
   pytest:
-
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -40,21 +38,21 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-      with:
-        version: 1.1.12
-    - name: Install dependencies
-      run: |
-        poetry install
-    - name: Test with pytest
-      env:
-        TAP_MEGAPHONE_AUTH_TOKEN: ${{ secrets.TAP_MEGAPHONE_AUTH_TOKEN }}
-        TAP_MEGAPHONE_ORGANIZATION_ID: ${{ secrets.TAP_MEGAPHONE_ORGANIZATION_ID }}
-      run: |
-        poetry run pytest --capture=no
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.8.3
+      - name: Install dependencies
+        run: |
+          poetry install
+      - name: Test with pytest
+        env:
+          TAP_MEGAPHONE_AUTH_TOKEN: ${{ secrets.TAP_MEGAPHONE_AUTH_TOKEN }}
+          TAP_MEGAPHONE_ORGANIZATION_ID: ${{ secrets.TAP_MEGAPHONE_ORGANIZATION_ID }}
+        run: |
+          poetry run pytest --capture=no
