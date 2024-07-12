@@ -1,6 +1,5 @@
 """megaphone Authentication."""
 
-
 from singer_sdk.authenticators import SimpleAuthenticator
 
 

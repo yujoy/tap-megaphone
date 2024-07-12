@@ -17,6 +17,7 @@ if os.getenv("CI"):  # true when running a GitHub Actions workflow
 else:
     SAMPLE_CONFIG = read_json_file(CONFIG_PATH)
 
+
 # Run standard built-in tap tests from the SDK:
 def test_standard_tap_tests():
     """Run standard tap tests from the SDK."""
